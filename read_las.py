@@ -31,4 +31,6 @@ def read_las(path_las):
     
     # return numpy array
     data = pipeline.arrays[0]
-    return np.column_stack((data['X'], data['Y'], data['Z']))
+    
+    # normalize the points
+    return np.column_stack([data[dim] - np.min(data[dim]) for dim in ['X', 'Y', 'Z']])
