@@ -27,8 +27,8 @@ n_sides = n_view - 3      # number of sideviews
 path_csv_lookup = r"/home/mf1176/_repos/DetailView/lookup.csv"
 path_csv_train  = r"/home/mf1176/_repos/DetailView/train_labels.csv"
 #path_csv_vali   = r"/home/mf1176/_repos/DetailView/vali_labels.csv"
-path_csv_test   = r"/mnt/gsdata//projects/ecosense/tls/single-pcs-tls-all/tree_heights.csv"
-path_las        = r"/mnt/gsdata//projects/ecosense/tls/single-pcs-tls-all/"
+path_csv_test   = r"/mnt/gsdata/projects/ecosense/tls/single-pcs-tls-all/tree_heights.csv"
+path_las        = r"/mnt/gsdata/projects/ecosense/tls/single-pcs-tls-all/"
 
 # get mean & sd of height from training data
 #train_metadata = pd.read_csv(path_csv_train)
