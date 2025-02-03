@@ -11,6 +11,7 @@ import torch
 import numpy as np
 import pandas as pd
 from torchvision import transforms
+import argparse
 
 # import own scripts
 import parallel_densenet as net
@@ -24,11 +25,16 @@ res = 256       # image ressolution
 n_sides = n_view - 3      # number of sideviews
 
 # set paths
-path_csv_lookup = r"/home/mf1176/_repos/DetailView/lookup.csv"
-path_csv_train  = r"/home/mf1176/_repos/DetailView/train_labels.csv"
-#path_csv_vali   = r"/home/mf1176/_repos/DetailView/vali_labels.csv"
-path_csv_test   = r"/mnt/gsdata/projects/ecosense/tls/single-pcs-tls-all/tree_heights.csv"
-path_las        = r"/mnt/gsdata/projects/ecosense/tls/single-pcs-tls-all/"
+path_csv_lookup = os.path.join(os.path.dirname(__file__), "lookup.csv")
+path_csv_train  = os.path.join(os.path.dirname(__file__), "train_labels.csv")
+
+# Parse arguments
+parser = argparse.ArgumentParser(description='Predict tree species.')
+parser.add_argument('path_las', type=str, help='Path to the LAS files directory')
+args = parser.parse_args()
+
+path_las = args.path_las
+path_csv_test = os.path.join(path_las, "tree_heights.csv")
 
 # get mean & sd of height from training data
 #train_metadata = pd.read_csv(path_csv_train)
@@ -60,7 +66,6 @@ print(device)
 # model = net.ParallelDenseNet(n_classes = n_class, n_views = n_view)
 model = net.SimpleView(n_classes = n_class, n_views = n_view)
 model.load_state_dict(torch.load("/mnt/gsdata/projects/ecosense/DetailView-model/model_202305171452_60"))
-
 
 # give to device
 model.to(device)
@@ -94,7 +99,8 @@ for epoch in range(50):
     
     # iterate over validation dataloader in batches
     for i, t_data in enumerate(test_dataloader, 0):
-        print(f"...epoch {epoch}:...{i}/{num_batches}")
+        if i % 100 == 0:
+            print(f"...epoch {epoch}:...{i}/{num_batches}")
         
         # load the batch
         t_inputs, t_heights, t_paths = t_data
