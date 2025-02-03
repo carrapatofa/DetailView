@@ -99,8 +99,8 @@ for epoch in range(50):
     
     # iterate over validation dataloader in batches
     for i, t_data in enumerate(test_dataloader, 0):
-        if i % 100 == 0:
-            print(f"...epoch {epoch}:...{i}/{num_batches}")
+        if i % 200 == 0:
+            print(f"...epoch {epoch+1}:...{i}/{num_batches}")
         
         # load the batch
         t_inputs, t_heights, t_paths = t_data
