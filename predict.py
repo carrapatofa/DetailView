@@ -35,6 +35,12 @@ args = parser.parse_args()
 
 path_las = args.path_las
 path_csv_test = os.path.join(path_las, "tree_heights.csv")
+print(f"Path to LAS files: {path_las}")
+print(f"Path to csv file: {path_csv_test}")
+
+# sleep for 5 seconds to avoid conflicts with other jobs
+import time
+time.sleep(5)
 
 # get mean & sd of height from training data
 #train_metadata = pd.read_csv(path_csv_train)
@@ -51,7 +57,7 @@ os.environ["NUMEXPR_NUM_THREADS"] = "40" # export NUMEXPR_NUM_THREADS=6
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 #%% make predictions
-
+print("Making predictions...")
 # load best model
 # get the device
 device = (
@@ -143,6 +149,7 @@ except Exception as e:
     print(e)
 
 # save data frame
+print("Saving predictions...")
 output_dir = os.path.dirname(path_las)
 joined.to_csv(os.path.join(output_dir, "predictions.csv"), index = False)
 try:
@@ -150,3 +157,4 @@ try:
 except Exception as e:
     print("No probabilities saved")
     print(e)
+print(f"Predictions saved to {output_dir}")
