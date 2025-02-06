@@ -5,6 +5,11 @@ Created on Thu Sep 14 09:21:58 2023
 @author: Julian
 """
 
+# things to change before running:
+# - path to model
+# - parameters if needed (work nice as they are)
+
+
 # import packages
 import os
 import torch
@@ -157,4 +162,6 @@ try:
 except Exception as e:
     print("No probabilities saved")
     print(e)
+# save lookup csv to output directory
+lookup.to_csv(os.path.join(output_dir, "lookup_species.csv"), index = False)
 print(f"Predictions saved to {output_dir}")
