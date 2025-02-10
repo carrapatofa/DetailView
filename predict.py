@@ -76,7 +76,7 @@ print(device)
 
 # model = net.ParallelDenseNet(n_classes = n_class, n_views = n_view)
 model = net.SimpleView(n_classes = n_class, n_views = n_view)
-model.load_state_dict(torch.load("/mnt/gsdata/projects/ecosense/DetailView-model/model_202305171452_60"))
+model.load_state_dict(torch.load("/mnt/gsdata/projects/ecosense/DetailView-model/neu/Model_FT_Dec_17_2024"))
 
 # give to device
 model.to(device)
