@@ -59,14 +59,14 @@ os.environ["MKL_NUM_THREADS"] = "40" # export MKL_NUM_THREADS=6
 os.environ["VECLIB_MAXIMUM_THREADS"] = "40" # export VECLIB_MAXIMUM_THREADS=4
 os.environ["NUMEXPR_NUM_THREADS"] = "40" # export NUMEXPR_NUM_THREADS=6
 # Set the GPU to use (e.g., GPU 0)
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 #%% make predictions
 print("Making predictions...")
 # load best model
 # get the device
 device = (
-    "cuda:0"
+    "cuda"
     if torch.cuda.is_available()
     else "mps"
     if torch.backends.mps.is_available()
