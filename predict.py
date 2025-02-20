@@ -36,12 +36,16 @@ path_csv_train  = os.path.join(os.path.dirname(__file__), "train_labels.csv")
 # Parse arguments
 parser = argparse.ArgumentParser(description='Predict tree species.')
 parser.add_argument('path_las', type=str, help='Path to the LAS files directory')
+parser.add_argument('--model_path', type=str, default="/mnt/data/mf1176/model_weights/detailview/Model_FT_Dec_17_2024", help='Path to the model weights file')
 args = parser.parse_args()
 
 path_las = args.path_las
 path_csv_test = os.path.join(path_las, "tree_heights.csv")
+model_path = args.model_path
+
 print(f"Path to LAS files: {path_las}")
 print(f"Path to csv file: {path_csv_test}")
+print(f"Path to model: {model_path}")
 
 # sleep for 5 seconds to avoid conflicts with other jobs
 import time
@@ -76,7 +80,7 @@ print(device)
 
 # model = net.ParallelDenseNet(n_classes = n_class, n_views = n_view)
 model = net.SimpleView(n_classes = n_class, n_views = n_view)
-model.load_state_dict(torch.load("/mnt/gsdata/projects/ecosense/DetailView-model/neu/Model_FT_Dec_17_2024"))
+model.load_state_dict(torch.load(model_path))
 
 # give to device
 model.to(device)
