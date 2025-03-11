@@ -159,7 +159,7 @@ except Exception as e:
 
 # save data frame
 print("Saving predictions...")
-output_dir = os.path.dirname(path_las)
+output_dir = path_las
 joined.to_csv(os.path.join(output_dir, "predictions.csv"), index = False)
 try:
     data_probs_df.to_csv(os.path.join(output_dir, "predictions_probabilities.csv"), index = False)
