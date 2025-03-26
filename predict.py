@@ -36,7 +36,9 @@ path_csv_train  = os.path.join(os.path.dirname(__file__), "train_labels.csv")
 # Parse arguments
 parser = argparse.ArgumentParser(description='Predict tree species.')
 parser.add_argument('path_las', type=str, help='Path to the LAS files directory')
-parser.add_argument('--model_path', type=str, default="/mnt/data/mf1176/model_weights/detailview/Model_FT_Dec_17_2024", help='Path to the model weights file')
+parser.add_argument('--model_path', type=str, default="/mnt/data/mf1176/model_weights/detailview/model_202305171452_60", help='Path to the model weights file')
+# old model weights: model_weights/detailview/model_202305171452_60
+# new model weights: Model_FT_Dec_17_2024
 args = parser.parse_args()
 
 path_las = args.path_las
